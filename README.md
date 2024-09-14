@@ -1,4 +1,7 @@
-# Welcome to Chainlit by Literal AI 👋
+# Welcome to Chainlit by Literal AI, Modified for Gymitrainer 👋
+
+## Modifications for Gymitrainer
+- Removes the 'P' keybind for starting voice mode input
 
 [![](https://dcbadge.vercel.app/api/server/ZThrUxbAYw?style=flat)](https://discord.gg/k73SQ3FyUh)
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/chainlit_io.svg?style=social&label=Follow%20%40chainlit_io)](https://twitter.com/chainlit_io)
