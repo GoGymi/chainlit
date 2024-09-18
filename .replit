@@ -1,0 +1,8 @@
+modules = ["nodejs-20", "python-3.12", "web"]
+run = "pnpm run test"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "chainlit run chainlit/hello.py"]

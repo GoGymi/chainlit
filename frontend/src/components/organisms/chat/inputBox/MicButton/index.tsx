@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
+//import { useHotkeys } from 'react-hotkeys-hook';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { toast } from 'sonner';
 
@@ -53,7 +53,8 @@ const MicButton = ({ disabled }: Props) => {
     _startRecording(fileReferences);
   }, [_startRecording, fileReferences, disabled]);
 
-  useHotkeys('p', startRecording);
+  // Fixes the issue where users type the character 'p' and it opens the audio recording menu
+  //useHotkeys('p', startRecording);
 
   const size = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'))
     ? 'small'
