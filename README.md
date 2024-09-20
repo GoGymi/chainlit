@@ -26,16 +26,16 @@ Full documentation is available [here](https://docs.chainlit.io). You can ask Ch
 > Check out [Literal AI](https://literalai.com), our product to monitor and evaluate LLM applications! It works with any Python or TypeScript applications and [seamlessly](https://docs.chainlit.io/data-persistence/overview) with Chainlit by adding a `LITERAL_API_KEY` in your project.
 
 <p align="center">
-    <img src="https://github.com/Chainlit/chainlit/assets/13104895/0c2cc7a9-766c-41d3-aae2-117a2d0eb8ed" width="80%" />
+    <img src="https://github.com/Chainlit/chainlit/assets/13104895/0c2cc7a9-766c-41d3-aae2-117a2d0eb8ed" alt="Chainlit user interface" width="80%"></img>
 </p>
 
 ## Installation
 
 Open a terminal and run:
 
-```bash
-$ pip install chainlit
-$ chainlit hello
+```sh
+pip install chainlit
+chainlit hello
 ```
 
 If this opens the `hello app` in your browser, you're all set!
@@ -80,8 +80,8 @@ async def main(message: cl.Message):
 
 Now run it!
 
-```
-$ chainlit run demo.py -w
+```sh
+chainlit run demo.py -w
 ```
 
 <img src="/images/quick-start.png" alt="Quick Start"></img>
@@ -91,7 +91,7 @@ $ chainlit run demo.py -w
 Full documentation is available [here](https://docs.chainlit.io). Key features:
 
 - [💬 Multi Modal chats](https://docs.chainlit.io/advanced-features/multi-modal)
-- [💭 Chain of Thought visualisation](https://docs.chainlit.io/concepts/step)
+- [💭 Chain of Thought visualization](https://docs.chainlit.io/concepts/step)
 - [💾 Data persistence + human feedback](https://docs.chainlit.io/data-persistence/overview)
 - [🐛 Debug Mode](https://docs.chainlit.io/data-persistence/enterprise#debug-mode)
 - [👤 Authentication](https://docs.chainlit.io/authentication/overview)
