@@ -1,8 +1,12 @@
 modules = ["nodejs-20", "python-3.12", "web"]
-run = "pnpm run test"
+run = "cd backend && poetry run chainlit run chainlit/hello.py --host 0.0.0.0"
 
 [nix]
 channel = "stable-24_05"
 
 [deployment]
 run = ["sh", "-c", "chainlit run chainlit/hello.py"]
+
+[[ports]]
+localPort = 8000
+externalPort = 80
