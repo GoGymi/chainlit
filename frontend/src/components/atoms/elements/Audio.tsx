@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { grey } from 'theme/palette';
 
 import { Typography } from '@mui/material';
@@ -8,6 +9,13 @@ import { type IAudioElement } from 'client-types/';
 
 const AudioElement = ({ element }: { element: IAudioElement }) => {
   const theme = useTheme();
+  const [hasAutoplayed, setHasAutoplayed] = useState(false);
+
+  useEffect(() => {
+    if (element.autoPlay && !hasAutoplayed) {
+      setHasAutoplayed(true);
+    }
+  }, [element.autoPlay, hasAutoplayed]);
 
   if (!element.url) {
     return null;
@@ -25,7 +33,11 @@ const AudioElement = ({ element }: { element: IAudioElement }) => {
       >
         {element.name}
       </Typography>
-      <audio controls src={element.url} autoPlay={element.autoPlay}></audio>
+      <audio
+        controls
+        src={element.url}
+        autoPlay={element.autoPlay && !hasAutoplayed}
+      ></audio>
     </Box>
   );
 };
