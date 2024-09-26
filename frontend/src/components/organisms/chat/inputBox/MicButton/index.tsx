@@ -69,7 +69,7 @@ const MicButton = ({ disabled }: Props) => {
         title={
           <Translator
             path="components.organisms.chat.inputBox.speechButton.start"
-            suffix=" (P)"
+            suffix=""
           />
         }
       >
