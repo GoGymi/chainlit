@@ -9,13 +9,25 @@ import { type IAudioElement } from 'client-types/';
 
 const AudioElement = ({ element }: { element: IAudioElement }) => {
   const theme = useTheme();
-  const [hasAutoplayed, setHasAutoplayed] = useState(false);
+
+  // Ensures the element only autplays once
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
-    if (element.autoPlay && !hasAutoplayed) {
-      setHasAutoplayed(true);
+    // Unique key for each audio based on its URL
+    const autoplayedKey = `audio-autoplayed-${element.url}`;
+
+    // localStorage persists across component unmounts and remounts (like when the widget is closed and opened)
+    const hasAutoplayed = localStorage.getItem(autoplayedKey);
+
+    if (!hasAutoplayed && element.autoPlay) {
+      // Autoplay the audio and mark it as played
+      setShouldAutoPlay(true);
+      localStorage.setItem(autoplayedKey, 'true');
+    } else {
+      setShouldAutoPlay(false);
     }
-  }, [element.autoPlay, hasAutoplayed]);
+  }, [element.url, element.autoPlay]);
 
   if (!element.url) {
     return null;
@@ -33,11 +45,7 @@ const AudioElement = ({ element }: { element: IAudioElement }) => {
       >
         {element.name}
       </Typography>
-      <audio
-        controls
-        src={element.url}
-        autoPlay={element.autoPlay && !hasAutoplayed}
-      ></audio>
+      <audio controls src={element.url} autoPlay={shouldAutoPlay}></audio>
     </Box>
   );
 };
