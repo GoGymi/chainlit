@@ -84,7 +84,9 @@ const SideBar = () => {
           <ThreadHistory />
         ) : (
           <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
-            <Alert severity="info">Conversations are not persisted.</Alert>
+            <Alert severity="info">
+              Konversationen werden nicht aufrechterhalten.
+            </Alert>
           </Box>
         )}
         <Stack mb={2}>
