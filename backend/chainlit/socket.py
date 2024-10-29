@@ -244,7 +244,7 @@ async def stop(sid):
         trace_event("stop_task")
 
         init_ws_context(session)
-        await Message(content="Task manually stopped.").send()
+        await Message(content="Aufgabe gestoppt.").send()
 
         if session.current_task:
             session.current_task.cancel()
