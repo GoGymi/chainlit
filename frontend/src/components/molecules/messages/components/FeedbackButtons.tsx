@@ -118,7 +118,7 @@ const FeedbackButtons = ({ message }: Props) => {
         </Tooltip>
       ),
       () => (
-        <Tooltip title="Night Hilfreich">
+        <Tooltip title="Nicht Hilfreich">
           <span>
             <IconButton
               color="inherit"

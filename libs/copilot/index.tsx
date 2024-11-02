@@ -36,9 +36,6 @@ window.mountChainlitWidget = (config: IWidgetConfig) => {
   const shadowRootElement = document.createElement('div');
   shadowRootElement.id = 'cl-shadow-root';
 
-  // This is so that we get get the URL of the actual Chainlit server, regardless of where it's embedded
-  container.setAttribute('domain', config.chainlitServer);
-
   shadowContainer.appendChild(shadowRootElement);
 
   const cache = createCache({
@@ -48,6 +45,10 @@ window.mountChainlitWidget = (config: IWidgetConfig) => {
   });
 
   window.cl_shadowRootElement = shadowRootElement;
+
+  // This is so that we get get the URL of the actual Chainlit server, regardless of where it's embedded
+  console.log('Setting domain of Chainlit widget for audio...');
+  shadowRootElement.setAttribute('domain', config.chainlitServer);
 
   root = ReactDOM.createRoot(shadowRootElement);
   root.render(
