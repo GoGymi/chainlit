@@ -102,7 +102,7 @@ const FeedbackButtons = ({ message }: Props) => {
 
     const baseButtons = [
       () => (
-        <Tooltip title="Helpful">
+        <Tooltip title="Hilfreich">
           <span>
             <IconButton
               color="inherit"
@@ -118,7 +118,7 @@ const FeedbackButtons = ({ message }: Props) => {
         </Tooltip>
       ),
       () => (
-        <Tooltip title="Not helpful">
+        <Tooltip title="Night Hilfreich">
           <span>
             <IconButton
               color="inherit"
@@ -137,7 +137,7 @@ const FeedbackButtons = ({ message }: Props) => {
 
     if (comment) {
       baseButtons.push(() => (
-        <Tooltip title="Feedback">
+        <Tooltip title="Rückmeldung">
           <span>
             <IconButton
               color="inherit"
@@ -175,7 +175,7 @@ const FeedbackButtons = ({ message }: Props) => {
         title={
           <Stack direction="row" alignItems="center" gap={2}>
             {showFeedbackDialog === 0 ? <DownIcon /> : <UpIcon />}
-            Add a comment
+            Einen Kommentar hinzufügen
           </Stack>
         }
         content={

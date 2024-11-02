@@ -35,6 +35,10 @@ window.mountChainlitWidget = (config: IWidgetConfig) => {
   const shadowContainer = container.attachShadow({ mode: 'open' });
   const shadowRootElement = document.createElement('div');
   shadowRootElement.id = 'cl-shadow-root';
+
+  // This is so that we get get the URL of the actual Chainlit server, regardless of where it's embedded
+  container.setAttribute('domain', config.chainlitServer);
+
   shadowContainer.appendChild(shadowRootElement);
 
   const cache = createCache({
