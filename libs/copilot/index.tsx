@@ -50,9 +50,15 @@ window.mountChainlitWidget = (config: IWidgetConfig) => {
     <React.StrictMode>
       <CacheProvider value={cache}>
         <style type="text/css">
-          {clStyles}
-          {hljsStyles}
-          {sonnerCss}
+          {`
+            ${clStyles}
+            ${hljsStyles}
+            ${sonnerCss}
+
+            .katex-html {
+              display: none;
+            }
+          `}
         </style>
         <AppWrapper widgetConfig={config} />
       </CacheProvider>
