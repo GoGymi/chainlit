@@ -27,9 +27,6 @@ const UploadButton = ({
   const { config } = useConfig();
   const { chatProfile } = useChatSession(); // Retrieve chatProfile
 
-  // Render the button only if chatProfile is NOT "Gespräch"
-  if (chatProfile === 'Gespräch') return null;
-
   const upload = useUpload({
     spec: fileSpec,
     onResolved: (payloads: File[]) => onFileUpload(payloads),
@@ -41,8 +38,13 @@ const UploadButton = ({
     ? 'small'
     : 'medium';
 
-  if (!upload || !config?.features?.spontaneous_file_upload?.enabled)
+  if (
+    chatProfile === 'Gespräch' ||
+    !upload ||
+    !config?.features?.spontaneous_file_upload?.enabled
+  )
     return null;
+
   const { getRootProps, getInputProps } = upload;
 
   return (

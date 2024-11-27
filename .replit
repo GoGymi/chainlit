@@ -1,1 +1,2 @@
 modules = ["nodejs-20", "python-base-3.12"]
+run = "chainlit run "
