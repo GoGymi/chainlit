@@ -3,10 +3,13 @@ import { useUpload } from 'hooks';
 import { IconButton, Theme, Tooltip, useMediaQuery } from '@mui/material';
 
 import { FileSpec, useConfig } from '@chainlit/react-client';
+import { useChatSession } from '@chainlit/react-client';
 
 import { Translator } from 'components/i18n';
 
 import AttachmentIcon from 'assets/attachment';
+
+// Import useChatSession
 
 type Props = {
   disabled?: boolean;
@@ -22,6 +25,11 @@ const UploadButton = ({
   onFileUploadError
 }: Props) => {
   const { config } = useConfig();
+  const { chatProfile } = useChatSession(); // Retrieve chatProfile
+
+  // Render the button only if chatProfile is NOT "Gespräch"
+  if (chatProfile === 'Gespräch') return null;
+
   const upload = useUpload({
     spec: fileSpec,
     onResolved: (payloads: File[]) => onFileUpload(payloads),
