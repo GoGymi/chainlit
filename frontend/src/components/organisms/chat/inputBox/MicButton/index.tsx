@@ -1,5 +1,3 @@
-import { useHotkeys } from 'react-hotkeys-hook';
-
 import {
   CircularProgress,
   IconButton,
@@ -9,7 +7,9 @@ import {
 } from '@mui/material';
 
 import { useAudio, useConfig } from '@chainlit/react-client';
+import { useChatSession } from '@chainlit/react-client';
 
+// Import useChatSession
 import { Translator } from 'components/i18n';
 
 import MicrophoneIcon from 'assets/microphone';
@@ -22,17 +22,10 @@ interface Props {
 const MicButton = ({ disabled }: Props) => {
   const { config } = useConfig();
   const { startConversation, endConversation, audioConnection } = useAudio();
-  const isEnabled = !!config?.features.audio.enabled;
-
-  useHotkeys(
-    'p',
-    () => {
-      if (!isEnabled) return;
-      if (audioConnection === 'on') return endConversation();
-      return startConversation();
-    },
-    [isEnabled, audioConnection, startConversation, endConversation]
-  );
+  const { chatProfile } = useChatSession(); // Retrieve chatProfile
+  console.log('chatProfile', chatProfile);
+  const isEnabled =
+    chatProfile == 'Gespräch' && !!config?.features.audio.enabled;
 
   const size = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'))
     ? 'small'
@@ -52,7 +45,6 @@ const MicButton = ({ disabled }: Props) => {
                 ? 'components.organisms.chat.inputBox.speechButton.start'
                 : 'components.organisms.chat.inputBox.speechButton.loading'
             }
-            suffix=" (P)"
           />
         }
       >
@@ -88,4 +80,5 @@ const MicButton = ({ disabled }: Props) => {
     </>
   );
 };
+
 export default MicButton;

@@ -1,1 +1,1 @@
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "python-base-3.12"]
