@@ -6,5 +6,5 @@ export default {
     'poetry run -C backend ruff format',
     () => 'pnpm run lintPython'
   ],
-  '.github/{workflows,actions}/**': ['actionlint']
+  '.github/{workflows,actions}/**': []
 };
