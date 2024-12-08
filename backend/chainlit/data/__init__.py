@@ -11,7 +11,7 @@ _data_layer: Optional[BaseDataLayer] = None
 
 def get_data_layer():
     global _data_layer
-    print("Getting data layer", _data_layer)
+    # print("Getting data layer", _data_layer)
 
     if not _data_layer:
         from chainlit.config import config

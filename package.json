@@ -10,7 +10,7 @@
     "eslint": "^8.48.0",
     "husky": "^9.1.6",
     "kill-port": "^2.0.1",
-    "lint-staged": "^13.3.0",
+    "lint-staged": "^15.2.10",
     "prettier": "^2.8.8",
     "shell-exec": "^1.1.2",
     "ts-node": "^10.9.1",

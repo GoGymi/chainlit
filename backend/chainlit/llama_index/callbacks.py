@@ -1,14 +1,16 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional, Union
 
-from chainlit.context import context_var
-from chainlit.element import Text
-from chainlit.step import Step, StepType
 from literalai import ChatGeneration, CompletionGeneration, GenerationMessage
 from literalai.helper import utc_now
+from literalai.observability.generation import GenerationMessageRole
 from llama_index.core.callbacks import TokenCountingHandler
 from llama_index.core.callbacks.schema import CBEventType, EventPayload
 from llama_index.core.llms import ChatMessage, ChatResponse, CompletionResponse
 from llama_index.core.tools.types import ToolMetadata
+
+from chainlit.context import context_var
+from chainlit.element import Text
+from chainlit.step import Step, StepType
 
 DEFAULT_IGNORE = [
     CBEventType.CHUNKING,
@@ -17,6 +19,8 @@ DEFAULT_IGNORE = [
     CBEventType.NODE_PARSING,
     CBEventType.TREE,
 ]
+
+RoleType = Literal["user", "assistant", "tool", "function", "system"]
 
 
 class LlamaIndexCallbackHandler(TokenCountingHandler):
@@ -34,7 +38,6 @@ class LlamaIndexCallbackHandler(TokenCountingHandler):
             event_starts_to_ignore=event_starts_to_ignore,
             event_ends_to_ignore=event_ends_to_ignore,
         )
-
         self.steps = {}
 
     def _get_parent_id(self, event_parent_id: Optional[str] = None) -> Optional[str]:
@@ -143,19 +146,24 @@ class LlamaIndexCallbackHandler(TokenCountingHandler):
             context_var.get().loop.create_task(step.update())
 
         elif event_type == CBEventType.LLM:
-            formatted_messages = payload.get(
-                EventPayload.MESSAGES
-            )  # type: Optional[List[ChatMessage]]
+            formatted_messages = payload.get(EventPayload.MESSAGES)
             formatted_prompt = payload.get(EventPayload.PROMPT)
             response = payload.get(EventPayload.RESPONSE)
 
             if formatted_messages:
-                messages = [
-                    GenerationMessage(
-                        role=m.role.value, content=m.content or ""  # type: ignore
-                    )
-                    for m in formatted_messages
-                ]
+                messages = []
+                for m in formatted_messages:
+                    role = m.role.value
+                    if isinstance(role, str) and role in (
+                        "user",
+                        "assistant",
+                        "tool",
+                        "function",
+                        "system",
+                    ):
+                        messages.append(
+                            GenerationMessage(role=role, content=m.content or "")  # type: ignore
+                        )
             else:
                 messages = None
 
@@ -174,15 +182,24 @@ class LlamaIndexCallbackHandler(TokenCountingHandler):
 
             if messages and isinstance(response, ChatResponse):
                 msg: ChatMessage = response.message
-                step.generation = ChatGeneration(
-                    model=model,
-                    messages=messages,
-                    message_completion=GenerationMessage(
-                        role=msg.role.value,  # type: ignore
-                        content=content,
-                    ),
-                    token_count=token_count,
-                )
+                role_value = msg.role.value if hasattr(msg.role, "value") else None
+                if isinstance(role_value, str) and role_value in (
+                    "user",
+                    "assistant",
+                    "tool",
+                    "function",
+                    "system",
+                ):
+                    role: RoleType = role_value  # type: ignore
+                    step.generation = ChatGeneration(
+                        model=model,
+                        messages=messages,
+                        message_completion=GenerationMessage(
+                            role=role,
+                            content=content,
+                        ),
+                        token_count=token_count,
+                    )
             elif formatted_prompt:
                 step.generation = CompletionGeneration(
                     model=model,
