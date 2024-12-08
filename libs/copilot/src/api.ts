@@ -4,6 +4,7 @@ import { ChainlitAPI, ClientError } from '@chainlit/react-client';
 
 export function makeApiClient(chainlitServer: string) {
   const httpEndpoint = chainlitServer;
+  const username = sessionStorage.getItem('username');
 
   const on401 = () => {
     toast.error('Unauthorized');
@@ -13,5 +14,15 @@ export function makeApiClient(chainlitServer: string) {
     toast.error(error.toString());
   };
 
-  return new ChainlitAPI(httpEndpoint, 'copilot', on401, onError);
+  // Create API client with default headers
+  const client = new ChainlitAPI(httpEndpoint, 'copilot', on401, onError);
+
+  // Set default headers if username exists
+  if (username) {
+    client.setDefaultHeaders({
+      Authorization: username
+    });
+  }
+
+  return client;
 }

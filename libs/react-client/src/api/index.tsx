@@ -41,12 +41,18 @@ export class ClientError extends Error {
 type Payload = FormData | any;
 
 export class APIBase {
+  protected defaultHeaders: Record<string, string> = {};
+
   constructor(
     public httpEndpoint: string,
     public type: 'webapp' | 'copilot' | 'teams' | 'slack' | 'discord',
     public on401?: () => void,
     public onError?: (error: ClientError) => void
   ) {}
+
+  setDefaultHeaders(headers: Record<string, string>) {
+    this.defaultHeaders = headers;
+  }
 
   buildEndpoint(path: string) {
     if (this.httpEndpoint.endsWith('/')) {
@@ -74,18 +80,16 @@ export class APIBase {
     signal?: AbortSignal
   ): Promise<Response> {
     try {
-      const headers: { Authorization?: string; 'Content-Type'?: string } = {};
-      if (token) headers['Authorization'] = this.checkToken(token); // Assuming token is a bearer token
+      const headers: { [key: string]: string } = {
+        ...this.defaultHeaders // Include default headers
+      };
 
-      let body;
-
-      if (data instanceof FormData) {
-        body = data;
-      } else {
+      if (token) headers['Authorization'] = this.checkToken(token);
+      if (!(data instanceof FormData)) {
         headers['Content-Type'] = 'application/json';
-        body = data ? JSON.stringify(data) : null;
       }
-
+      const body =
+        data instanceof FormData ? data : data ? JSON.stringify(data) : null;
       const res = await fetch(this.buildEndpoint(path), {
         method,
         headers,
