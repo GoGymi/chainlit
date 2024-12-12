@@ -16,7 +16,8 @@ from typing import (
 )
 
 import filetype
-from pydantic.dataclasses import Field, dataclass
+from pydantic.dataclasses import dataclass
+from pydantic.fields import Field
 from syncer import asyncio
 
 from chainlit.context import context

@@ -1,6 +1,7 @@
 from typing import List
 
-from pydantic.dataclasses import Field, dataclass
+from pydantic.dataclasses import dataclass
+from pydantic.fields import Field
 
 from chainlit.context import context
 from chainlit.input_widget import InputWidget

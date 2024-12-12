@@ -18,7 +18,8 @@ from typing import (
 
 import tomli
 from dataclasses_json import DataClassJsonMixin
-from pydantic.dataclasses import Field, dataclass
+from pydantic.dataclasses import dataclass
+from pydantic.fields import Field
 from starlette.datastructures import Headers
 
 from chainlit.data.base import BaseDataLayer
