@@ -75,7 +75,6 @@ from .callbacks import (
 )
 
 if TYPE_CHECKING:
-    from chainlit.haystack.callbacks import HaystackAgentCallbackHandler
     from chainlit.langchain.callbacks import (
         AsyncLangchainCallbackHandler,
         LangchainCallbackHandler,
@@ -108,7 +107,6 @@ __getattr__ = make_module_getattr(
         "LangchainCallbackHandler": "chainlit.langchain.callbacks",
         "AsyncLangchainCallbackHandler": "chainlit.langchain.callbacks",
         "LlamaIndexCallbackHandler": "chainlit.llama_index.callbacks",
-        "HaystackAgentCallbackHandler": "chainlit.haystack.callbacks",
         "instrument_openai": "chainlit.openai",
         "instrument_mistralai": "chainlit.mistralai",
     }
@@ -168,7 +166,6 @@ __all__ = [
     "LangchainCallbackHandler",
     "AsyncLangchainCallbackHandler",
     "LlamaIndexCallbackHandler",
-    "HaystackAgentCallbackHandler",
     "instrument_openai",
     "instrument_mistralai",
     "password_auth_callback",

@@ -2,7 +2,8 @@ from abc import abstractmethod
 from collections import defaultdict
 from typing import Any, Dict, List, Optional
 
-from pydantic.dataclasses import Field, dataclass
+from pydantic.dataclasses import dataclass
+from pydantic.fields import Field
 
 from chainlit.types import InputWidgetType
 
@@ -77,7 +78,7 @@ class Select(InputWidget):
     initial_index: Optional[int] = None
     initial_value: Optional[str] = None
     values: List[str] = Field(default_factory=lambda: [])
-    items: Dict[str, str] = Field(default_factory=lambda: defaultdict(dict))
+    items: Dict[str, str] = Field(default_factory=dict)
 
     def __post_init__(
         self,
