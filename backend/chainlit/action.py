@@ -9,7 +9,7 @@ from chainlit.context import context
 from chainlit.telemetry import trace_event
 
 
-@dataclass(frozen=True)
+@dataclass
 class Action(DataClassJsonMixin):
     # Name of the action, this should be used in the action_callback
     name: str
@@ -19,6 +19,8 @@ class Action(DataClassJsonMixin):
     label: str = ""
     # The description of the action. This is what the user will see when they hover the action.
     description: str = ""
+    # This should not be set manually, only used internally.
+    forId: Optional[str] = None
     # The ID of the action
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     # Show the action in a drawer menu
@@ -29,6 +31,7 @@ class Action(DataClassJsonMixin):
 
     async def send(self, for_id: str):
         trace_event(f"send {self.__class__.__name__}")
+        self.forId = for_id
         await context.emitter.emit("action", self.to_dict())
 
     async def remove(self):
