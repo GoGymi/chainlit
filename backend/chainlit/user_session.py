@@ -1,6 +1,7 @@
 from typing import Dict
 
 from chainlit.context import WebsocketSession, context
+from chainlit.user import User
 
 user_sessions: Dict[str, Dict] = {}
 
@@ -44,6 +45,10 @@ class UserSession:
 
         user_session = user_sessions[context.session.id]
         user_session[key] = value
+
+        # When user is updated, sync it with the context session
+        if key == "user" and isinstance(value, User):
+            context.session.user = value
 
 
 user_session = UserSession()
