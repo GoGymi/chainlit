@@ -6,8 +6,7 @@ import {
   useMediaQuery
 } from '@mui/material';
 
-import { useAudio, useConfig } from '@chainlit/react-client';
-import { useChatSession } from '@chainlit/react-client';
+import { useAudio } from '@chainlit/react-client';
 
 // Import useChatSession
 import { Translator } from 'components/i18n';
@@ -20,18 +19,11 @@ interface Props {
 }
 
 const MicButton = ({ disabled }: Props) => {
-  const { config } = useConfig();
   const { startConversation, endConversation, audioConnection } = useAudio();
-  const { chatProfile } = useChatSession(); // Retrieve chatProfile
-  console.log('chatProfile', chatProfile);
-  const isEnabled =
-    chatProfile == 'Gespräch' && !!config?.features.audio.enabled;
 
   const size = useMediaQuery<Theme>((theme) => theme.breakpoints.down('sm'))
     ? 'small'
     : 'medium';
-
-  if (!isEnabled) return null;
 
   return (
     <>
