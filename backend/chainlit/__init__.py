@@ -191,3 +191,7 @@ __all__ = [
 
 def __dir__():
     return __all__
+
+
+# Export the enable_mathpractice function
+from chainlit.copilot import enable_mathpractice

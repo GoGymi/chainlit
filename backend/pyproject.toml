@@ -63,6 +63,7 @@ packaging = "^23.1"
 python-multipart = "^0.0.9"
 pyjwt = "^2.8.0"
 numpy = "^1.26"
+pandas-stubs = "^2.2.3.241126"
 
 [tool.poetry.group.tests]
 optional = true
@@ -117,6 +118,7 @@ module = [
     "moto",
 ]
 ignore_missing_imports = true
+
 
 
 

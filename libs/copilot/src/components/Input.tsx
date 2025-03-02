@@ -14,7 +14,7 @@ import InputBoxFooter from '@chainlit/app/src/components/organisms/chat/inputBox
 import { IAttachment, attachmentsState } from '@chainlit/app/src/state/chat';
 import { chatSettingsOpenState } from '@chainlit/app/src/state/project';
 import { inputHistoryState } from '@chainlit/app/src/state/userInputHistory';
-import { FileSpec, useChatData } from '@chainlit/react-client';
+import { FileSpec, useChatData, useChatSession } from '@chainlit/react-client';
 
 interface Props {
   fileSpec: FileSpec;
@@ -38,6 +38,9 @@ const Input = memo(
     const [attachments, setAttachments] = useRecoilState(attachmentsState);
     const setInputHistory = useSetRecoilState(inputHistoryState);
     const setChatSettingsOpen = useSetRecoilState(chatSettingsOpenState);
+    const [currentMode, setCurrentMode] = useState<string | null>(null);
+    const { session } = useChatSession();
+    const socket = session?.socket;
 
     const ref = useRef<HTMLDivElement>(null);
     const {
@@ -53,6 +56,26 @@ const Input = memo(
     const disabled = _disabled || !!attachments.find((a) => !a.uploaded);
 
     const { t } = useTranslation();
+
+    // Listen for mode changes from the backend
+    useEffect(() => {
+      if (socket) {
+        const handleModeChange = (data: { mode: string }) => {
+          setCurrentMode(data.mode);
+        };
+
+        socket.on('copilot_mode', handleModeChange);
+
+        return () => {
+          socket.off('copilot_mode', handleModeChange);
+        };
+      }
+    }, [socket]);
+
+    // Helper function to check if features should be hidden based on mode
+    const shouldHideFeature = useCallback(() => {
+      return currentMode === 'mathpractice';
+    }, [currentMode]);
 
     useEffect(() => {
       const pasteEvent = (event: ClipboardEvent) => {
@@ -192,12 +215,15 @@ const Input = memo(
             justifyContent="space-between"
           >
             <Stack direction="row" alignItems="center" marginLeft={-1}>
-              <UploadButton
-                disabled={disabled}
-                fileSpec={fileSpec}
-                onFileUploadError={onFileUploadError}
-                onFileUpload={onFileUpload}
-              />
+              {!shouldHideFeature() && (
+                <UploadButton
+                  disabled={disabled}
+                  fileSpec={fileSpec}
+                  onFileUploadError={onFileUploadError}
+                  onFileUpload={onFileUpload}
+                />
+              )}
+
               {chatSettingsInputs.length > 0 && (
                 <IconButton
                   id="chat-settings-open-modal"
@@ -209,7 +235,7 @@ const Input = memo(
                   <TuneIcon fontSize="small" />
                 </IconButton>
               )}
-              <MicButton disabled={disabled} />
+              {!shouldHideFeature() && <MicButton disabled={disabled} />}
             </Stack>
             <Box>
               <InputBoxFooter />

@@ -1,0 +1,21 @@
+error during build:
+src/components/Input.tsx (17:9): "useSocket" is not exported by "../react-client/dist/index.mjs", imported by "src/components/Input.tsx".
+file: /home/runner/workspace/chainlit/libs/copilot/src/components/Input.tsx:17:9
+
+15: import { chatSettingsOpenState } from '@chainlit/app/src/state/project';
+16: import { inputHistoryState } from '@chainlit/app/src/state/userInputHistory';
+17: import { useSocket } from '@chainlit/react-client';
+             ^
+18: import { FileSpec, useChatData } from '@chainlit/react-client';
+
+    at getRollupError (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/parseAst.js:395:41)
+    at error (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/parseAst.js:391:42)
+    at Module.error (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:15535:16)
+    at Module.traceVariable (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:15984:29)
+    at ModuleScope.findVariable (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:13770:39)
+    at ReturnValueScope.findVariable (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:5252:38)
+    at FunctionBodyScope.findVariable (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:5252:38)
+    at Identifier.bind (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:5035:40)
+    at CallExpression.bind (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:2855:23)
+    at CallExpression.bind (file:///home/runner/workspace/chainlit/libs/copilot/node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/es/shared/node-entry.js:11235:15)
+ ELIFECYCLE  Command failed with exit code 1.
