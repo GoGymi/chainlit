@@ -39,7 +39,7 @@ chainlit = 'chainlit.cli:cli'
 script = "build.py"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0.0"
+python = ">=3.9,<4.0.0"
 httpx = ">=0.23.0"
 literalai = "0.0.623"
 dataclasses_json = "^0.6.7"
