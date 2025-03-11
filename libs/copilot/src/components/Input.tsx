@@ -39,8 +39,8 @@ const Input = memo(
     const setInputHistory = useSetRecoilState(inputHistoryState);
     const setChatSettingsOpen = useSetRecoilState(chatSettingsOpenState);
     const [currentMode, setCurrentMode] = useState<string | null>(() => {
-      // Initialize from localStorage if available
-      return localStorage.getItem('copilot_mode');
+      // Initialize from sessionStorage if available
+      return sessionStorage.getItem('copilot_mode');
     });
     const { session } = useChatSession();
     const socket = session?.socket;
@@ -65,8 +65,8 @@ const Input = memo(
       if (socket) {
         const handleModeChange = (data: { mode: string }) => {
           setCurrentMode(data.mode);
-          // Store the mode in localStorage to persist across sessions
-          localStorage.setItem('copilot_mode', data.mode);
+          // Store the mode in sessionStorage to persist only during this session
+          sessionStorage.setItem('copilot_mode', data.mode);
         };
 
         socket.on('copilot_mode', handleModeChange);
@@ -74,8 +74,18 @@ const Input = memo(
         // Request current mode from backend when socket connects
         socket.emit('get_copilot_mode');
 
+        // Add event listener for page unload/navigation
+        const handlePageUnload = () => {
+          sessionStorage.removeItem('copilot_mode');
+        };
+
+        window.addEventListener('beforeunload', handlePageUnload);
+        window.addEventListener('popstate', handlePageUnload);
+
         return () => {
           socket.off('copilot_mode', handleModeChange);
+          window.removeEventListener('beforeunload', handlePageUnload);
+          window.removeEventListener('popstate', handlePageUnload);
         };
       }
     }, [socket]);
