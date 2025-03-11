@@ -359,6 +359,11 @@ const useChatSession = () => {
       socket.on('token_usage', (count: number) => {
         setTokenCount((old) => old + count);
       });
+
+      // Request the current copilot mode from the backend
+      socket.on('connect', () => {
+        socket.emit('get_copilot_mode');
+      });
     },
     [setSession, sessionId, chatProfile]
   );

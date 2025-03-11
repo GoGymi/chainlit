@@ -10,6 +10,7 @@ from chainlit.auth import get_current_user, require_login
 from chainlit.chat_context import chat_context
 from chainlit.config import config
 from chainlit.context import init_ws_context
+from chainlit.copilot import get_current_mode
 from chainlit.data import get_data_layer
 from chainlit.element import Element
 from chainlit.logger import logger
@@ -408,3 +409,14 @@ async def change_settings(sid, settings: Dict[str, Any]):
 
     if config.code.on_settings_update:
         await config.code.on_settings_update(settings)
+
+
+@sio.on("get_copilot_mode")
+async def handle_get_copilot_mode(sid: str):
+    """Handle requests for the current copilot mode."""
+    context = init_ws_context(sid)
+    from chainlit.copilot import get_current_mode
+
+    mode = await get_current_mode()
+    if mode:
+        await context.emitter.emit("copilot_mode", {"mode": mode})
