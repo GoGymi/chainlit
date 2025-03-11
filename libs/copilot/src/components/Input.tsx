@@ -40,7 +40,19 @@ const Input = memo(
     const setChatSettingsOpen = useSetRecoilState(chatSettingsOpenState);
     const [currentMode, setCurrentMode] = useState<string | null>(() => {
       // Initialize from sessionStorage if available
-      return sessionStorage.getItem('copilot_mode');
+      const mode = sessionStorage.getItem('copilot_mode');
+      const timestamp = sessionStorage.getItem('copilot_mode_timestamp');
+
+      // Only use the stored mode if it has a valid timestamp and is less than 5 minutes old
+      // This handles cases where unload events didn't fire properly
+      if (mode && timestamp && Date.now() - Number(timestamp) < 300000) {
+        return mode;
+      }
+
+      // Otherwise clear stale data
+      sessionStorage.removeItem('copilot_mode');
+      sessionStorage.removeItem('copilot_mode_timestamp');
+      return null;
     });
     const { session } = useChatSession();
     const socket = session?.socket;
@@ -65,27 +77,51 @@ const Input = memo(
       if (socket) {
         const handleModeChange = (data: { mode: string }) => {
           setCurrentMode(data.mode);
-          // Store the mode in sessionStorage to persist only during this session
+          // Store the mode in sessionStorage with a timestamp
           sessionStorage.setItem('copilot_mode', data.mode);
+          // Add a timestamp to verify freshness on page reload
+          sessionStorage.setItem(
+            'copilot_mode_timestamp',
+            Date.now().toString()
+          );
+        };
+
+        const handlePageUnload = () => {
+          // Clear mode when page unloads
+          sessionStorage.removeItem('copilot_mode');
+          sessionStorage.removeItem('copilot_mode_timestamp');
         };
 
         socket.on('copilot_mode', handleModeChange);
-
-        // Request current mode from backend when socket connects
         socket.emit('get_copilot_mode');
 
-        // Add event listener for page unload/navigation
-        const handlePageUnload = () => {
-          sessionStorage.removeItem('copilot_mode');
-        };
-
-        window.addEventListener('beforeunload', handlePageUnload);
+        // Use multiple events to catch all navigation/unload scenarios
+        window.addEventListener('beforeunload', handlePageUnload, {
+          capture: true
+        });
+        window.addEventListener('pagehide', handlePageUnload, {
+          capture: true
+        });
+        window.addEventListener('unload', handlePageUnload, { capture: true });
+        window.addEventListener('hashchange', handlePageUnload);
         window.addEventListener('popstate', handlePageUnload);
 
         return () => {
           socket.off('copilot_mode', handleModeChange);
-          window.removeEventListener('beforeunload', handlePageUnload);
+          window.removeEventListener('beforeunload', handlePageUnload, {
+            capture: true
+          });
+          window.removeEventListener('pagehide', handlePageUnload, {
+            capture: true
+          });
+          window.removeEventListener('unload', handlePageUnload, {
+            capture: true
+          });
+          window.removeEventListener('hashchange', handlePageUnload);
           window.removeEventListener('popstate', handlePageUnload);
+
+          // Explicitly clear mode when component unmounts
+          handlePageUnload();
         };
       }
     }, [socket]);

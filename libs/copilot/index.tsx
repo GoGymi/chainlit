@@ -67,6 +67,9 @@ window.mountChainlitWidget = (config: IWidgetConfig) => {
 };
 
 window.unmountChainlitWidget = () => {
+  // Explicitly clear copilot_mode from sessionStorage when widget is unmounted
+  sessionStorage.removeItem('copilot_mode');
+  sessionStorage.removeItem('copilot_mode_timestamp');
   root?.unmount();
 };
 
