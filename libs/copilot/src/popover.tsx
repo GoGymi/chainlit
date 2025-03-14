@@ -20,6 +20,7 @@ export default function PopOver({ anchorEl, buttonHeight }: Props) {
       open={Boolean(anchorEl)}
       anchorEl={anchorEl}
       placement="top"
+      disablePortal
       sx={{
         display: 'flex',
         flexDirection: 'column',
