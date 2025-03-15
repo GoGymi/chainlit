@@ -35,7 +35,7 @@ export default function Widget({ config }: Props) {
   const isPopoverOpen = Boolean(anchorEl);
 
   return (
-    <>
+    <Box sx={{ position: 'fixed', right: '0', top: '0' }}>
       <PopOver anchorEl={anchorEl} buttonHeight={buttonHeight} />
       <Fab
         disableRipple
@@ -43,7 +43,6 @@ export default function Widget({ config }: Props) {
         id="chainlit-copilot-button"
         sx={{
           minHeight: 'auto',
-          position: 'fixed',
           bottom: 24,
           right: 24,
           zIndex: 1000,
@@ -88,6 +87,6 @@ export default function Widget({ config }: Props) {
           </Box>
         </Fade>
       </Fab>
-    </>
+    </Box>
   );
 }

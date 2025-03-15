@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { Box } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import Popper from '@mui/material/Popper';
 
 import Header from 'components/Header';
 
@@ -15,19 +14,18 @@ interface Props {
 export default function PopOver({ anchorEl, buttonHeight }: Props) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <Popper
+    <Box
       id="chainlit-copilot-popover"
-      open={Boolean(anchorEl)}
-      anchorEl={anchorEl}
-      placement="top"
-      disablePortal
       sx={{
-        display: 'flex',
+        display: anchorEl ? 'flex' : 'none',
         flexDirection: 'column',
-        inset: 'auto auto 14px -24px !important',
-        height: `min(730px, calc(100vh - ${buttonHeight} - 48px))`,
+        // inset: 'auto auto 14px -24px !important',
+        height: `min(730px, calc(100vh - ${buttonHeight} - 48px - 76px))`,
         width: expanded ? '80vw' : 'min(400px, 80vw)',
         overflow: 'hidden',
+        bottom: '108px',
+        right: '24px',
+        position: 'absolute',
         borderRadius: '12px',
         background: (theme) => theme.palette.background.default,
         boxShadow:
@@ -48,6 +46,6 @@ export default function PopOver({ anchorEl, buttonHeight }: Props) {
           <Chat />
         </Box>
       </Fade>
-    </Popper>
+    </Box>
   );
 }
