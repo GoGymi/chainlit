@@ -1,11 +1,17 @@
 import { createContext } from 'react';
 
-interface IWidgetContext {
+export interface WidgetProps {
+  chainlitServer: string;
   accessToken?: string;
+  theme?: 'light' | 'dark';
 }
 
-const defaultContext = {
-  accessToken: undefined
+interface IWidgetContext extends WidgetProps {}
+
+const defaultContext: WidgetProps = {
+  chainlitServer: '',
+  accessToken: undefined,
+  theme: 'light'
 };
 
 const WidgetContext = createContext<IWidgetContext>(defaultContext);
