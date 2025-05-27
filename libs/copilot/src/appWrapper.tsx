@@ -1,31 +1,26 @@
 import { makeApiClient } from 'api';
 import App from 'app';
-import { WidgetContext } from 'context';
-import { RecoilRoot } from 'recoil';
-import { IWidgetConfig } from 'types';
+import { WidgetContext, WidgetProps } from 'context';
+import { useEffect } from 'react';
 
-import { i18nSetupLocalization } from '@chainlit/app/src/i18n';
 import { ChainlitContext } from '@chainlit/react-client';
 
-i18nSetupLocalization();
-interface Props {
-  widgetConfig: IWidgetConfig;
-}
+export default function AppWrapper(props: WidgetProps) {
+  const apiClient = makeApiClient(props.chainlitServer);
 
-export default function AppWrapper({ widgetConfig }: Props) {
-  const apiClient = makeApiClient(widgetConfig.chainlitServer);
+  useEffect(() => {
+    console.log('[Copilot AppWrapper] Initializing copilot with config:', {
+      chainlitServer: props.chainlitServer,
+      accessToken: props.accessToken ? '***' : 'none',
+      theme: props.theme
+    });
+  }, [props]);
 
   return (
-    <ChainlitContext.Provider value={apiClient}>
-      <RecoilRoot>
-        <WidgetContext.Provider
-          value={{
-            accessToken: widgetConfig.accessToken
-          }}
-        >
-          <App widgetConfig={widgetConfig} />
-        </WidgetContext.Provider>
-      </RecoilRoot>
-    </ChainlitContext.Provider>
+    <WidgetContext.Provider value={props}>
+      <ChainlitContext.Provider value={apiClient}>
+        <App />
+      </ChainlitContext.Provider>
+    </WidgetContext.Provider>
   );
 }

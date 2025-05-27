@@ -17,6 +17,7 @@ import {
   threadHistoryState,
   useChatData,
   useChatInteract,
+  useChatMessages,
   useConfig
 } from '@chainlit/react-client';
 import { sideViewState } from '@chainlit/react-client';
@@ -35,6 +36,7 @@ const Chat = () => {
   const { error, disabled, callFn } = useChatData();
   const { uploadFile } = useChatInteract();
   const uploadFileRef = useRef(uploadFile);
+  const { messages } = useChatMessages();
 
   const fileSpec = useMemo(
     () => ({
@@ -150,6 +152,14 @@ const Chat = () => {
   const enableMultiModalUpload =
     !disabled && config?.features?.spontaneous_file_upload?.enabled;
 
+  // Show welcome screen when there are no messages
+  const showWelcomeScreen = !messages?.length;
+
+  console.log('[Copilot Chat] Render state:', {
+    messagesCount: messages?.length || 0,
+    showWelcomeScreen
+  });
+
   return (
     <Box
       {...(enableMultiModalUpload
@@ -200,7 +210,7 @@ const Chat = () => {
             autoScroll={autoScroll}
             setAutoScroll={setAutoScroll}
           >
-            <WelcomeScreen hideLogo />
+            {showWelcomeScreen && <WelcomeScreen hideLogo />}
             <Box my={1} />
             <Messages />
           </ScrollContainer>
