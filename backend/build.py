@@ -34,7 +34,11 @@ def pnpm_install(project_root, pnpm_path):
 
 
 def pnpm_buildui(project_root, pnpm_path):
-    run_subprocess([pnpm_path, "buildUi"], project_root)
+    mode = os.environ.get("CHAINLIT_BUILD_MODE")
+    if mode == "development":
+        run_subprocess([pnpm_path, "buildDevUi"], project_root)
+    else:
+        run_subprocess([pnpm_path, "buildUi"], project_root)
 
 
 def copy_directory(src, dst, description):
