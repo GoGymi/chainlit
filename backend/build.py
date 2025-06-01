@@ -34,6 +34,7 @@ def pnpm_install(project_root, pnpm_path):
 
 
 def pnpm_buildui(project_root, pnpm_path):
+    # TODO: Log os.environ etc. etc. since CHAINLIT_BUILD_MODE is not being set by the chainlit_installer.sh
     mode = os.environ.get("CHAINLIT_BUILD_MODE")
     if mode == "development":
         run_subprocess([pnpm_path, "buildDevUi"], project_root)
