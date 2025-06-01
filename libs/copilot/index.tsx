@@ -13,6 +13,7 @@ import sonnerCss from './sonner.css?inline';
 import hljsStyles from 'highlight.js/styles/monokai-sublime.css?inline';
 
 import AppWrapper from './src/appWrapper';
+import { i18nSetupLocalization } from './src/i18n';
 import { IWidgetConfig } from './src/types';
 
 const id = 'chainlit-copilot';
@@ -28,6 +29,9 @@ declare global {
 }
 
 window.mountChainlitWidget = (config: IWidgetConfig) => {
+  // Initialize i18n before mounting the widget
+  i18nSetupLocalization();
+
   const container = document.createElement('div');
   container.id = id;
   document.body.appendChild(container);
