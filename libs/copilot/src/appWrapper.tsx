@@ -34,9 +34,9 @@ export default function AppWrapper(props: { widgetConfig: WidgetProps }) {
 
   return (
     <RecoilRoot>
-      <WidgetContext.Provider value={props}>
+      <WidgetContext.Provider value={widgetConfig}>
         <ChainlitContext.Provider value={apiClient}>
-          <App widgetConfig={props} />
+          <App widgetConfig={widgetConfig} />
         </ChainlitContext.Provider>
       </WidgetContext.Provider>
     </RecoilRoot>
