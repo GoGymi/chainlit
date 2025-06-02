@@ -1,0 +1,229 @@
+hook.js:608 Duplicate atom key "ThreadIdToResume". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChatProfile". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "SessionId". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "SessionIdSelector". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "Session". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "Actions". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "Messages". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "TokenCount". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "Loading". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "AskUser". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "WavRecorder". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "WavStreamPlayer". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "AudioConnection". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "isAiSpeaking". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "CallFn". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChatSettings". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChatSettingsValue/Default". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChatSettingsValue". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChatSettingsValue__withFallback". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "DisplayElements". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "TasklistElements". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "FirstUserInteraction". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "AccessToken". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "User". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ChainlitConfig". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "AuthConfig". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "ThreadHistory". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "SideView". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+hook.js:608 Duplicate atom key "CurrentThreadId". This is a FATAL ERROR in
+      production. But it is safe to ignore this warning if it occurred because of
+      hot module replacement.
+overrideMethod @ hook.js:608
+lernziele-fuer-den-aufsatzkurs/:2327 Mounting Chainlit widget...
+lernziele-fuer-den-aufsatzkurs/:2337 Total Questions: 0
+lernziele-fuer-den-aufsatzkurs/:2340 Questions with Tip: 0
+lernziele-fuer-den-aufsatzkurs/:2347 Current URL: /themen/lernziele-fuer-den-aufsatzkurs/
+lernziele-fuer-den-aufsatzkurs/:2371 Mounted widget!
+wordpress_script.js:1 Loaded Gymitrainer AI Wordpress script!
+hook.js:608 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.get (index.js:383:7944)
+    at uke (index.js:383:6001)
+    at index.js:383:6137
+    at index.js:85:5524
+    at index.js:85:7906
+    at index.js:85:9059
+    at SM (index.js:48:24346)
+    at ire (index.js:48:31717)
+overrideMethod @ hook.js:608
+hook.js:608 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.post (index.js:383:7999)
+    at xie.logout (index.js:383:8384)
+    at o (index.js:383:6415)
+    at T (index.js:383:6496)
+    at index.js:1417:48883
+    at SM (index.js:48:24346)
+    at RS (index.js:48:42568)
+    at index.js:48:40877
+overrideMethod @ hook.js:608
+index.js:1417 [Copilot AppWrapper] Initializing copilot with config: Object
+2hook.js:608 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.get (index.js:383:7944)
+    at uke (index.js:383:6001)
+    at index.js:383:6137
+    at index.js:85:5524
+    at index.js:85:7906
+    at index.js:85:9059
+    at SM (index.js:48:24346)
+    at ire (index.js:48:31717)
+overrideMethod @ hook.js:608
+index.js:383 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.post (index.js:383:7999)
+    at xie.logout (index.js:383:8384)
+    at o (index.js:383:6415)
+    at T (index.js:383:6496)
+    at index.js:1417:48883
+    at SM (index.js:48:24346)
+    at RS (index.js:48:42568)
+    at index.js:48:40877
+script.js:18 Stilmittel-Spiel Pro Skript geladen
+lernziele-fuer-den-aufsatzkurs/:2384 Suche Suchfeld for: group-activity-search
+lernziele-fuer-den-aufsatzkurs/:2391 Das Sucheingabefeld group-activity-search wurde nicht gefunden.
+lernziele-fuer-den-aufsatzkurs/:2384 Suche Suchfeld for: dir-activity-search
+lernziele-fuer-den-aufsatzkurs/:2391 Das Sucheingabefeld dir-activity-search wurde nicht gefunden.
+2index.js:383 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.get (index.js:383:7944)
+    at uke (index.js:383:6001)
+    at index.js:383:6137
+    at index.js:85:5524
+    at index.js:85:7906
+    at Array.<anonymous> (index.js:85:8981)
+    at ce.isPaused.ce.onErrorRetry.retryCount (index.js:85:8424)
+overrideMethod @ hook.js:608
+fetch @ index.js:383
+get @ index.js:383
+uke @ index.js:383
+(anonymous) @ index.js:383
+(anonymous) @ index.js:85
+(anonymous) @ index.js:85
+(anonymous) @ index.js:85
+ce.isPaused.ce.onErrorRetry.retryCount @ index.js:85
+2index.js:383 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.get (index.js:383:7944)
+    at uke (index.js:383:6001)
+    at index.js:383:6137
+    at index.js:85:5524
+    at index.js:85:7906
+    at Array.<anonymous> (index.js:85:8981)
+    at ce.isPaused.ce.onErrorRetry.retryCount (index.js:85:8424)
+overrideMethod @ hook.js:608
+fetch @ index.js:383
+get @ index.js:383
+uke @ index.js:383
+(anonymous) @ index.js:383
+(anonymous) @ index.js:85
+(anonymous) @ index.js:85
+(anonymous) @ index.js:85
+ce.isPaused.ce.onErrorRetry.retryCount @ index.js:85
+setTimeout
+$Pe @ index.js:85
+(anonymous) @ index.js:85
+await in (anonymous)
+(anonymous) @ index.js:85
+ce.isPaused.ce.onErrorRetry.retryCount @ index.js:85
+2index.js:383 TypeError: Cannot read properties of undefined (reading 'endsWith')
+    at xie.buildEndpoint (index.js:383:7276)
+    at xie.fetch (index.js:383:7649)
+    at xie.get (index.js:383:7944)
+    at uke (index.js:383:6001)
+    at index.js:383:6137
+    at index.js:85:5524
+    at index.js:85:7906
+    at Array.<anonymous> (index.js:85:8981)
+    at ce.isPaused.ce.onErrorRetry.retryCount (index.js:85:8424)
