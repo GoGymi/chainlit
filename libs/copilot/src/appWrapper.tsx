@@ -6,16 +6,31 @@ import { RecoilRoot } from 'recoil';
 
 import { ChainlitContext } from '@chainlit/react-client';
 
-export default function AppWrapper(props: WidgetProps) {
-  const apiClient = makeApiClient(props.chainlitServer);
+export default function AppWrapper(props: { widgetConfig: WidgetProps }) {
+  // Debug: Log all received props
+  console.log('[Copilot AppWrapper] Received props:', props);
+
+  const { widgetConfig } = props;
+
+  // Use chainlitServer from widgetConfig
+  const serverUrl = widgetConfig.chainlitServer;
+
+  if (!serverUrl) {
+    console.error(
+      '[Copilot AppWrapper] chainlitServer is required but not provided'
+    );
+    return <div>Error: Chainlit server configuration missing</div>;
+  }
+
+  const apiClient = makeApiClient(serverUrl);
 
   useEffect(() => {
     console.log('[Copilot AppWrapper] Initializing copilot with config:', {
-      chainlitServer: props.chainlitServer,
-      accessToken: props.accessToken ? '***' : 'none',
-      theme: props.theme
+      chainlitServer: widgetConfig.chainlitServer,
+      accessToken: widgetConfig.accessToken ? '***' : 'none',
+      theme: widgetConfig.theme
     });
-  }, [props]);
+  }, [widgetConfig]);
 
   return (
     <RecoilRoot>

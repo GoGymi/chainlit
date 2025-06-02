@@ -29,6 +29,20 @@ declare global {
 }
 
 window.mountChainlitWidget = (config: IWidgetConfig) => {
+  // Validate configuration
+  if (!config || !config.chainlitServer) {
+    console.error(
+      '[Copilot] Invalid widget configuration. chainlitServer is required.'
+    );
+    return;
+  }
+
+  console.log('[Copilot] Mounting widget with config:', {
+    chainlitServer: config.chainlitServer,
+    accessToken: config.accessToken ? '***' : 'none'
+  });
+  console.log('[Copilot] Full props received:', config);
+
   // Initialize i18n before mounting the widget
   i18nSetupLocalization();
 
