@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 
 import {
   ChainlitContext,
@@ -64,9 +64,7 @@ export default function Starter({ starter }: Props) {
             height={20}
             width={20}
           />
-        ) : (
-          <Box sx={{ height: 20, width: 20 }} />
-        )}
+        ) : null}
         <Typography
           sx={{
             overflow: 'hidden',
