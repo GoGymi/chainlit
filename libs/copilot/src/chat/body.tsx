@@ -14,6 +14,7 @@ import WelcomeScreen from '@chainlit/app/src/components/organisms/chat/welcomeSc
 import { useUpload } from '@chainlit/app/src/hooks';
 import { IAttachment, attachmentsState } from '@chainlit/app/src/state/chat';
 import {
+  IStep,
   threadHistoryState,
   useChatData,
   useChatInteract,
@@ -48,21 +49,6 @@ const Chat = () => {
   };
 
   const showWelcomeScreen = !hasMessage(messages) && !!config?.starters;
-
-  // Debug logging with more details
-  console.log('[Copilot Chat] Render state:', {
-    messagesCount: messages.length,
-    messages: messages.map((m) => ({
-      id: m.id,
-      type: m.type,
-      author: m.name,
-      content: m.output?.substring(0, 50)
-    })),
-    hasStarters: !!config?.starters,
-    startersCount: config?.starters?.length || 0,
-    showWelcomeScreen,
-    hasActualMessages: hasMessage(messages)
-  });
 
   const fileSpec = useMemo(
     () => ({

@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Box, Button, Fade, Grid, Stack, Typography } from '@mui/material';
+import { Button, Fade, Grid, Stack, Typography } from '@mui/material';
 
 import {
   ChainlitContext,
@@ -28,13 +28,6 @@ function Starter({ starter }: StarterProps) {
   const { user } = useAuth();
 
   const onSubmit = useCallback(async () => {
-    console.log('[Copilot Starter] Starter clicked:', {
-      label: starter.label,
-      message: starter.message,
-      icon: starter.icon,
-      user: user?.identifier
-    });
-
     const message: IStep = {
       threadId: '',
       id: uuidv4(),
@@ -44,7 +37,6 @@ function Starter({ starter }: StarterProps) {
       createdAt: new Date().toISOString()
     };
 
-    console.log('[Copilot Starter] Sending starter message:', message);
     sendMessage(message, []);
   }, [user, sendMessage, starter]);
 
@@ -68,7 +60,7 @@ function Starter({ starter }: StarterProps) {
       onClick={onSubmit}
     >
       <Stack gap={0.5} flexGrow={1} height="100%">
-        {starter.icon ? (
+        {starter.icon && (
           <img
             style={{ borderRadius: '50%' }}
             src={
@@ -80,17 +72,12 @@ function Starter({ starter }: StarterProps) {
             height={16}
             width={16}
           />
-        ) : (
-          <Box sx={{ height: 16, width: 16 }} />
         )}
         <Typography
           sx={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
-            WebkitLineClamp: '2',
-            WebkitBoxOrient: 'vertical',
-            fontSize: '12px'
+            overflow: 'auto',
+            fontSize: '12px',
+            flexGrow: 1
           }}
           color="text.secondary"
           align="left"
@@ -105,15 +92,7 @@ function Starter({ starter }: StarterProps) {
 export default function WelcomeScreen({ show }: Props) {
   const { config } = useConfig();
 
-  console.log('[Copilot WelcomeScreen] Render:', {
-    hasConfig: !!config,
-    hasStarters: !!config?.starters,
-    startersCount: config?.starters?.length || 0,
-    starters: config?.starters
-  });
-
   if (!config?.starters?.length) {
-    console.log('[Copilot WelcomeScreen] No starters available, not rendering');
     return null;
   }
 
