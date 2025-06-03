@@ -36,7 +36,33 @@ const Chat = () => {
   const { error, disabled, callFn } = useChatData();
   const { uploadFile } = useChatInteract();
   const uploadFileRef = useRef(uploadFile);
-  const { messages } = useChatMessages();
+  const messages = useChatMessages().messages;
+
+  // Filter for actual chat messages, ignoring internal system messages
+  const hasMessage = (messages: IStep[]): boolean => {
+    const validTypes = ['user_message', 'assistant_message'];
+    return messages.some(
+      (message) =>
+        validTypes.includes(message.type) || hasMessage(message.steps || [])
+    );
+  };
+
+  const showWelcomeScreen = !hasMessage(messages) && !!config?.starters;
+
+  // Debug logging with more details
+  console.log('[Copilot Chat] Render state:', {
+    messagesCount: messages.length,
+    messages: messages.map((m) => ({
+      id: m.id,
+      type: m.type,
+      author: m.name,
+      content: m.output?.substring(0, 50)
+    })),
+    hasStarters: !!config?.starters,
+    startersCount: config?.starters?.length || 0,
+    showWelcomeScreen,
+    hasActualMessages: hasMessage(messages)
+  });
 
   const fileSpec = useMemo(
     () => ({
@@ -151,14 +177,6 @@ const Chat = () => {
 
   const enableMultiModalUpload =
     !disabled && config?.features?.spontaneous_file_upload?.enabled;
-
-  // Show welcome screen when there are no messages
-  const showWelcomeScreen = !messages?.length;
-
-  console.log('[Copilot Chat] Render state:', {
-    messagesCount: messages?.length || 0,
-    showWelcomeScreen
-  });
 
   return (
     <Box

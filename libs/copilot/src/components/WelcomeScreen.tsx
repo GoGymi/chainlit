@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Box, Button, Fade, Grid, Stack, Typography } from '@mui/material';
@@ -104,35 +104,16 @@ function Starter({ starter }: StarterProps) {
 
 export default function WelcomeScreen({ show }: Props) {
   const { config } = useConfig();
-  const [starters, setStarters] = useState<IStarter[]>([]);
-
-  useEffect(() => {
-    console.log('[Copilot WelcomeScreen] Config loaded:', {
-      hasConfig: !!config,
-      startersCount: config?.starters?.length || 0,
-      starters: config?.starters
-    });
-
-    if (config?.starters?.length) {
-      const limitedStarters = config.starters.slice(0, 4);
-      console.log('[Copilot WelcomeScreen] Setting starters:', limitedStarters);
-      setStarters(limitedStarters);
-    } else {
-      console.log('[Copilot WelcomeScreen] No starters found in config');
-      setStarters([]);
-    }
-  }, [config]);
 
   console.log('[Copilot WelcomeScreen] Render:', {
-    show,
-    startersCount: starters.length,
-    hasStarters: starters.length > 0
+    hasConfig: !!config,
+    hasStarters: !!config?.starters,
+    startersCount: config?.starters?.length || 0,
+    starters: config?.starters
   });
 
-  if (!starters.length) {
-    console.log(
-      '[Copilot WelcomeScreen] Not rendering - no starters available'
-    );
+  if (!config?.starters?.length) {
+    console.log('[Copilot WelcomeScreen] No starters available, not rendering');
     return null;
   }
 
@@ -158,7 +139,7 @@ export default function WelcomeScreen({ show }: Props) {
           Get started with one of these prompts:
         </Typography>
         <Grid container spacing={1.5} minHeight={80} justifyContent="center">
-          {starters.map((starter, i) => (
+          {config?.starters.map((starter, i) => (
             <Fade in={show} timeout={i * 200} key={i}>
               <Grid item xs={6}>
                 <Starter starter={starter} />
