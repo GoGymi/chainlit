@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button, Fade, Grid, Stack, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import {
   ChainlitContext,
@@ -20,6 +21,15 @@ interface Props {
 interface StarterProps {
   starter: IStarter;
 }
+
+const StyledStarterButton = styled(Button, {
+  name: 'StarterComponent',
+  slot: 'StarterButton'
+})((_) => ({
+  '&': {
+    display: 'none'
+  }
+}));
 
 function Starter({ starter }: StarterProps) {
   const apiClient = useContext(ChainlitContext);
@@ -41,7 +51,7 @@ function Starter({ starter }: StarterProps) {
   }, [user, sendMessage, starter]);
 
   return (
-    <Button
+    <StyledStarterButton
       id={`copilot-starter-${starter.label
         .trim()
         .toLowerCase()
@@ -56,8 +66,7 @@ function Starter({ starter }: StarterProps) {
         p: 1.5,
         textTransform: 'none',
         justifyContent: 'flex-start',
-        overflow: 'auto',
-        display: 'none'
+        overflow: 'auto'
       }}
       onClick={onSubmit}
     >
@@ -93,7 +102,7 @@ function Starter({ starter }: StarterProps) {
           {starter.label}
         </Typography>
       </Stack>
-    </Button>
+    </StyledStarterButton>
   );
 }
 
