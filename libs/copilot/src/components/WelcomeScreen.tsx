@@ -52,10 +52,10 @@ function Starter({ starter }: StarterProps) {
       sx={{
         border: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: '1rem',
-        height: 80,
         p: 1.5,
         textTransform: 'none',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        display: 'none'
       }}
       onClick={onSubmit}
     >
