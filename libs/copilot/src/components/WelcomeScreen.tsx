@@ -33,7 +33,7 @@ function Starter({ starter }: StarterProps) {
       id: uuidv4(),
       name: user?.identifier || 'User',
       type: 'user_message',
-      output: starter.message,
+      output: starter.label,
       createdAt: new Date().toISOString()
     };
 
@@ -49,14 +49,15 @@ function Starter({ starter }: StarterProps) {
       fullWidth
       disabled={loading}
       color="inherit"
+      className="starter-button"
       sx={{
         border: (theme) => `1px solid ${theme.palette.divider}`,
         borderRadius: '1rem',
         p: 1.5,
         textTransform: 'none',
         justifyContent: 'flex-start',
-        display: 'none',
-        overflow: 'auto'
+        overflow: 'auto',
+        display: 'none'
       }}
       onClick={onSubmit}
     >
