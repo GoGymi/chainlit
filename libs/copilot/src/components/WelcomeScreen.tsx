@@ -55,11 +55,18 @@ function Starter({ starter }: StarterProps) {
         p: 1.5,
         textTransform: 'none',
         justifyContent: 'flex-start',
-        display: 'none'
+        display: 'none',
+        overflow: 'auto'
       }}
       onClick={onSubmit}
     >
-      <Stack gap={0.5} flexGrow={1} height="100%">
+      <Stack
+        gap={0.5}
+        flexGrow={1}
+        height="100%"
+        justifyContent="center"
+        alignItems="center"
+      >
         {starter.icon && (
           <img
             style={{ borderRadius: '50%' }}
