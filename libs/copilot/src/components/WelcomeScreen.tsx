@@ -1,8 +1,7 @@
-import { useCallback, useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button, Fade, Grid, Stack, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 
 import {
   ChainlitContext,
@@ -22,20 +21,12 @@ interface StarterProps {
   starter: IStarter;
 }
 
-const StyledStarterButton = styled(Button, {
-  name: 'StarterComponent',
-  slot: 'StarterButton'
-})((_) => ({
-  '&': {
-    display: 'none'
-  }
-}));
-
 function Starter({ starter }: StarterProps) {
   const apiClient = useContext(ChainlitContext);
   const { sendMessage } = useChatInteract();
   const { loading } = useChatData();
   const { user } = useAuth();
+  const ref = React.useRef();
 
   const onSubmit = useCallback(async () => {
     const message: IStep = {
@@ -43,7 +34,7 @@ function Starter({ starter }: StarterProps) {
       id: uuidv4(),
       name: user?.identifier || 'User',
       type: 'user_message',
-      output: starter.label,
+      output: ref.current?.innerText,
       createdAt: new Date().toISOString()
     };
 
@@ -51,7 +42,7 @@ function Starter({ starter }: StarterProps) {
   }, [user, sendMessage, starter]);
 
   return (
-    <StyledStarterButton
+    <Button
       id={`copilot-starter-${starter.label
         .trim()
         .toLowerCase()
@@ -102,7 +93,7 @@ function Starter({ starter }: StarterProps) {
           {starter.label}
         </Typography>
       </Stack>
-    </StyledStarterButton>
+    </Button>
   );
 }
 
