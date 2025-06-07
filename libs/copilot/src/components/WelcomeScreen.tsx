@@ -26,15 +26,16 @@ function Starter({ starter }: StarterProps) {
   const { sendMessage } = useChatInteract();
   const { loading } = useChatData();
   const { user } = useAuth();
-  const ref = React.useRef();
+  const ref = React.useRef<HTMLDivElement | null>(null);
 
   const onSubmit = useCallback(async () => {
+    console.log(ref.current);
     const message: IStep = {
       threadId: '',
       id: uuidv4(),
       name: user?.identifier || 'User',
       type: 'user_message',
-      output: ref.current?.innerText,
+      output: ref.current?.innerText ?? '',
       createdAt: new Date().toISOString()
     };
 
@@ -57,7 +58,8 @@ function Starter({ starter }: StarterProps) {
         p: 1.5,
         textTransform: 'none',
         justifyContent: 'flex-start',
-        overflow: 'auto'
+        overflow: 'auto',
+        display: loading ? 'none' : 'flex'
       }}
       onClick={onSubmit}
     >
@@ -81,17 +83,19 @@ function Starter({ starter }: StarterProps) {
             width={16}
           />
         )}
-        <Typography
-          sx={{
-            overflow: 'auto',
-            fontSize: '12px',
-            flexGrow: 1
-          }}
-          color="text.secondary"
-          align="left"
-        >
-          {starter.label}
-        </Typography>
+        <div ref={ref}>
+          <Typography
+            sx={{
+              overflow: 'auto',
+              fontSize: '12px',
+              flexGrow: 1
+            }}
+            color="text.secondary"
+            align="left"
+          >
+            {starter.label}
+          </Typography>
+        </div>
       </Stack>
     </Button>
   );
