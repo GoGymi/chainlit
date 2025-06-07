@@ -38,8 +38,8 @@ def pnpm_buildui(project_root, pnpm_path):
         "There is a KNOWN BUG with the build process where it does not recognize --dev properly. Please enable it manually on line 40 of backend/build.py in the Chainlit Repl."
     )
     mode = os.environ.get("CHAINLIT_BUILD_MODE")
-    # print("DEV MODE OVERRIDE ON")
-    if mode == "development":
+    print("DEV MODE OVERRIDE ON")
+    if True:  # mode == "development":
         run_subprocess([pnpm_path, "buildDevUi"], project_root)
     else:
         run_subprocess([pnpm_path, "buildUi"], project_root)
