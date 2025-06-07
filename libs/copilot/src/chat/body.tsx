@@ -10,7 +10,6 @@ import ScrollContainer from '@chainlit/app/src/components/molecules/messages/Scr
 import { TaskList } from '@chainlit/app/src/components/molecules/tasklist/TaskList';
 import DropScreen from '@chainlit/app/src/components/organisms/chat/dropScreen';
 import ChatSettingsModal from '@chainlit/app/src/components/organisms/chat/settings';
-import WelcomeScreen from '@chainlit/app/src/components/organisms/chat/welcomeScreen';
 import { useUpload } from '@chainlit/app/src/hooks';
 import { IAttachment, attachmentsState } from '@chainlit/app/src/state/chat';
 import {
@@ -25,6 +24,7 @@ import { sideViewState } from '@chainlit/react-client';
 
 import { ElementSideView } from 'components/ElementSideView';
 import { InputBox } from 'components/InputBox';
+import WelcomeScreen from 'components/WelcomeScreen';
 
 import Messages from './messages';
 
@@ -214,7 +214,7 @@ const Chat = () => {
             autoScroll={autoScroll}
             setAutoScroll={setAutoScroll}
           >
-            {showWelcomeScreen && <WelcomeScreen hideLogo />}
+            {showWelcomeScreen && <WelcomeScreen show />}
             <Box my={1} />
             <Messages />
           </ScrollContainer>
