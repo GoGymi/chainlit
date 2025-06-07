@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Button, Fade, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Fade, Grid, Stack, Typography } from '@mui/material';
 
 import {
   ChainlitContext,
@@ -59,6 +59,8 @@ function Starter({ starter }: StarterProps) {
         textTransform: 'none',
         justifyContent: 'flex-start',
         overflow: 'auto',
+        flexBasis: '200px',
+        flexGrow: 1,
         display: loading ? 'none' : 'flex'
       }}
       onClick={onSubmit}
@@ -126,15 +128,18 @@ export default function WelcomeScreen({ show }: Props) {
         px={2}
         boxSizing={'border-box'}
       >
-        <Typography variant="h6" color="text.secondary" align="center">
-          Get started with one of these prompts:
-        </Typography>
         <Grid container spacing={1.5} minHeight={80} justifyContent="center">
           {config?.starters.map((starter, i) => (
             <Fade in={show} timeout={i * 200} key={i}>
-              <Grid item xs={6}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap'
+                }}
+              >
                 <Starter starter={starter} />
-              </Grid>
+              </Box>
             </Fade>
           ))}
         </Grid>
