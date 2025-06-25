@@ -11,7 +11,8 @@ const defaultMessageContext = {
   onFeedbackUpdated: undefined,
   showFeedbackButtons: true,
   onError: () => undefined,
-  uiName: ''
+  uiName: '',
+  latex: true
 };
 
 const MessageContext = createContext<IMessageContext>(defaultMessageContext);
