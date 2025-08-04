@@ -268,18 +268,20 @@ const Input = memo(
             justifyContent="space-between"
           >
             <Stack direction="row" alignItems="center" marginLeft={-1}>
-              {!shouldHideFeature() && (
-                <UploadButton
-                  disabled={disabled}
-                  fileSpec={fileSpec}
-                  onFileUploadError={(error) => {
-                    onFileUploadError(error);
-                  }}
-                  onFileUpload={(files) => {
-                    onFileUpload(files);
-                  }}
-                />
-              )}
+              {
+                /*!shouldHideFeature()*/ true && (
+                  <UploadButton
+                    disabled={disabled}
+                    fileSpec={fileSpec}
+                    onFileUploadError={(error) => {
+                      onFileUploadError(error);
+                    }}
+                    onFileUpload={(files) => {
+                      onFileUpload(files);
+                    }}
+                  />
+                )
+              }
 
               {chatSettingsInputs.length > 0 && (
                 <IconButton
