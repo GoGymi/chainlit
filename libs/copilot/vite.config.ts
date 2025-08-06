@@ -4,6 +4,7 @@ import { UserConfig, defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
+// I hope you have a lovely day, I am testing a commit right now
 export default defineConfig(({ mode }): UserConfig => {
   const enableSourcemap = mode === 'development';
 
