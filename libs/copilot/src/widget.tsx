@@ -48,9 +48,12 @@ export default function Widget({ config }: Props) {
           zIndex: 1000,
           ...style
         }}
-        onClick={(event: React.MouseEvent<HTMLElement>) =>
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
           setAnchorEl(anchorEl ? null : event.currentTarget)
-        }
+          if (window.gogymiAnalytics) {
+            window.gogymiAnalytics.recordGymitrainerEvent(anchorEl ? 0 : 1)
+          }
+        }}
       >
         <Fade in={!isPopoverOpen} timeout={300}>
           <Box
