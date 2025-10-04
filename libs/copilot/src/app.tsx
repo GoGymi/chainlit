@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { WidgetContext } from 'context';
 import { useContext, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -22,6 +23,16 @@ declare global {
     cl_shadowRootElement: HTMLDivElement;
   }
 }
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 1000 * 60 // 1 minute
+    }
+  }
+});
 
 export default function App({ widgetConfig }: Props) {
   const apiClient = useContext(ChainlitContext);
@@ -100,20 +111,22 @@ export default function App({ widgetConfig }: Props) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Toaster
-        className="toast"
-        position="bottom-center"
-        toastOptions={{
-          style: {
-            fontFamily: theme.typography.fontFamily,
-            background: theme.palette.background.paper,
-            border: `1px solid ${theme.palette.divider}`,
-            color: theme.palette.text.primary
-          }
-        }}
-      />
-      <Widget config={widgetConfig} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <Toaster
+          className="toast"
+          position="bottom-center"
+          toastOptions={{
+            style: {
+              fontFamily: theme.typography.fontFamily,
+              background: theme.palette.background.paper,
+              border: `1px solid ${theme.palette.divider}`,
+              color: theme.palette.text.primary
+            }
+          }}
+        />
+        <Widget config={widgetConfig} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

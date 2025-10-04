@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import { Element } from '@chainlit/app/src/components/atoms/elements/Element';
-import { IMessageElement } from '@chainlit/react-client/src/types';
+import { IMessageElement } from '@chainlit/react-client';
 
 interface SideViewProps {
   element?: IMessageElement;
