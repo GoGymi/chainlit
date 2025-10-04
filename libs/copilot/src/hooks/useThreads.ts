@@ -20,7 +20,7 @@ export const useThreads = ({ search }: UseThreadsProps) => {
     queryKey: ['threads', { search }],
     queryFn: async ({ pageParam }) => {
       const { pageInfo, data } = await apiClient.listThreads(
-        { first: BATCH_SIZE, cursor: pageParam },
+        { limit: BATCH_SIZE, offset: parseInt(pageParam ?? "0") },
         { search },
         accessToken
       );
