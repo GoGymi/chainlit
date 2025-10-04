@@ -6,7 +6,7 @@ import { ChainlitContext, accessTokenState } from '@chainlit/react-client';
 
 import { groupByDate } from '../utils/group';
 
-const BATCH_SIZE = 20;
+const BATCH_SIZE = "20";
 
 interface UseThreadsProps {
   search?: string;
@@ -20,7 +20,7 @@ export const useThreads = ({ search }: UseThreadsProps) => {
     queryKey: ['threads', { search }],
     queryFn: async ({ pageParam }) => {
       const { pageInfo, data } = await apiClient.listThreads(
-        { limit: BATCH_SIZE, offset: parseInt(pageParam ?? "0") },
+        { first: BATCH_SIZE, : cursor: pageParam ?? "0"},
         { search },
         accessToken
       );
