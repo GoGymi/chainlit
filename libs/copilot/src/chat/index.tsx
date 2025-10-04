@@ -7,7 +7,7 @@ import ChatBody from './body';
 
 export default function ChatWrapper() {
   const { accessToken } = useContext(WidgetContext);
-  const { connect, session } = useChatSession();
+  const { connect, session, idToResume } = useChatSession();
   const { sendMessage } = useChatInteract();
 
   useEffect(() => {
@@ -17,6 +17,14 @@ export default function ChatWrapper() {
       accessToken: `Bearer ${accessToken}`
     });
   }, [connect, accessToken]);
+
+  useEffect(() => {
+    if (idToResume && session?.socket?.connected) {
+      // Thread resumption is handled automatically by useChatSession
+      // Just ensure the connection is ready
+      console.debug('Resuming thread:', idToResume);
+    }
+  }, [idToResume, session?.socket?.connected]);
 
   useEffect(() => {
     // @ts-expect-error is not a valid prop

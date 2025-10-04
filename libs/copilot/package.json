@@ -17,6 +17,7 @@
   "dependencies": {
     "@chainlit/app": "workspace:^",
     "@chainlit/react-client": "workspace:^",
+    "@tanstack/react-query": "^5.59.0",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",

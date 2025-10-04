@@ -1,10 +1,15 @@
-import { IconButton, Stack } from '@mui/material';
+import { useRecoilState } from 'recoil';
+
+import HistoryIcon from '@mui/icons-material/History';
+import { IconButton, Stack, Tooltip } from '@mui/material';
 
 import ExpandIcon from '@chainlit/app/src/assets/expand';
 import MinimizeIcon from '@chainlit/app/src/assets/minimize';
 import { Logo } from '@chainlit/app/src/components/atoms/logo';
 import AudioPresence from '@chainlit/app/src/components/organisms/chat/inputBox/AudioPresence';
-import { useAudio } from '@chainlit/react-client/src';
+import { useAudio, useAuth, useConfig } from '@chainlit/react-client';
+
+import { copilotSettingsState } from '../state/settings';
 
 import ChatProfiles from './ChatProfiles';
 import NewChatButton from './NewChatButton';
@@ -16,6 +21,19 @@ interface Props {
 
 const Header = ({ expanded, setExpanded }: Props): JSX.Element => {
   const { audioConnection } = useAudio();
+  const { accessToken } = useAuth();
+  const { config } = useConfig();
+  const [settings, setSettings] = useRecoilState(copilotSettingsState);
+
+  // Show history button only if data persistence is enabled AND user is authenticated
+  const enableHistory = !!accessToken && !!config?.dataPersistence;
+
+  const toggleSidebar = () => {
+    setSettings((prev) => ({
+      ...prev,
+      isSidebarOpen: !prev.isSidebarOpen
+    }));
+  };
 
   return (
     <Stack
@@ -27,6 +45,16 @@ const Header = ({ expanded, setExpanded }: Props): JSX.Element => {
       bgcolor="background.paper"
     >
       <Stack direction="row" alignItems="center" spacing={0.5}>
+        {enableHistory ? (
+          <Tooltip
+            title={settings.isSidebarOpen ? 'Hide history' : 'Show history'}
+            arrow
+          >
+            <IconButton onClick={toggleSidebar} size="small" sx={{ mr: 0.5 }}>
+              <HistoryIcon sx={{ width: 16, height: 16 }} />
+            </IconButton>
+          </Tooltip>
+        ) : null}
         <Logo style={{ maxHeight: '25px' }} />
         <IconButton onClick={() => setExpanded(!expanded)}>
           {expanded ? (
