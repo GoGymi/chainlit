@@ -18,6 +18,7 @@ import {
   useChatData,
   useChatInteract,
   useChatMessages,
+  useChatSession,
   useConfig
 } from '@chainlit/react-client';
 import { sideViewState } from '@chainlit/react-client';
@@ -38,6 +39,7 @@ const Chat = () => {
   const { uploadFile } = useChatInteract();
   const uploadFileRef = useRef(uploadFile);
   const messages = useChatMessages().messages;
+  const { idToResume } = useChatSession();
 
   // Filter for actual chat messages, ignoring internal system messages
   const hasMessage = (messages: IStep[]): boolean => {
@@ -48,7 +50,8 @@ const Chat = () => {
     );
   };
 
-  const showWelcomeScreen = !hasMessage(messages) && !!config?.starters;
+  const showWelcomeScreen =
+    !idToResume && !hasMessage(messages) && !!config?.starters;
 
   const fileSpec = useMemo(
     () => ({
