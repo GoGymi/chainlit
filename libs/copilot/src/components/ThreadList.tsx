@@ -36,8 +36,8 @@ export const ThreadList = ({
   isFetching,
   isLoadingMore
 }: ThreadListProps) => {
-  const { idToResume, setIdToResume } = useChatSession();
-  const { clear } = useChatInteract();
+  const { idToResume } = useChatSession();
+  const { clear, setIdToResume } = useChatInteract();
 
   // Loading skeleton
   if (isFetching || (!threadHistory?.timeGroupedThreads && isLoadingMore)) {
