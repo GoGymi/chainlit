@@ -1,4 +1,4 @@
-import capitalize from 'lodash/capitalize';
+// import capitalize from 'lodash/capitalize';
 import map from 'lodash/map';
 import size from 'lodash/size';
 
@@ -186,7 +186,8 @@ export const ThreadList = ({
                           color: 'text.primary'
                         }}
                       >
-                        {capitalize(thread.name || 'Untitled')}
+                        {/* {capitalize(thread.name || 'Untitled')} */}
+                        {thread.content[0]}
                       </Typography>
                     </Stack>
                     {isSelected ? (
