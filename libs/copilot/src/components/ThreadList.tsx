@@ -187,7 +187,7 @@ export const ThreadList = ({
                         }}
                       >
                         {/* {capitalize(thread.name || 'Untitled')} */}
-                        {thread.content[0]}
+                        {thread.content[0].text || 'Untitled'}
                       </Typography>
                     </Stack>
                     {isSelected ? (
