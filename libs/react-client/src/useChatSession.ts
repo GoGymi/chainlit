@@ -214,6 +214,7 @@ const useChatSession = () => {
       });
 
       socket.on('resume_thread', (thread: IThread) => {
+        console.log('resume_thread', thread);
         let messages: IStep[] = [];
         for (const step of thread.steps) {
           messages = addMessage(messages, step);
