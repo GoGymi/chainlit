@@ -30,7 +30,7 @@ export const groupByDate = (data: IThread[]) => {
     } else if (isLast30Days) {
       category = 'Previous 30 days';
     } else {
-      const monthYear = createdAt.toLocaleString('default', {
+      const monthYear = createdAt.toLocaleString('de-DE', {
         month: 'long',
         year: 'numeric'
       });

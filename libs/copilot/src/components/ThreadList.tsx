@@ -127,13 +127,13 @@ export const ThreadList = ({
                   }}
                 >
                   {index === 'Today'
-                    ? 'Today'
+                    ? 'Heute'
                     : index === 'Yesterday'
-                    ? 'Yesterday'
+                    ? 'Gestern'
                     : index === 'Previous 7 days'
-                    ? 'Last 7 days'
+                    ? 'Letzte 7 Tage'
                     : index === 'Previous 30 days'
-                    ? 'Last 30 days'
+                    ? 'Letzte 30 Tage'
                     : index}
                 </Typography>
               </ListSubheader>

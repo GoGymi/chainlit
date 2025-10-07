@@ -17,6 +17,7 @@ export const useThreads = () => {
     queryFn: async ({ pageParam }) => {
       const { pageInfo, data } = await apiClient.listThreads(
         { first: BATCH_SIZE, cursor: pageParam ?? '0' },
+        {},
         accessToken
       );
       return { threads: data, pageInfo };
