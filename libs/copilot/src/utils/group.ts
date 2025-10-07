@@ -13,7 +13,7 @@ export const groupByDate = (data: IThread[]) => {
   thirtyDaysAgo.setDate(today.getDate() - 30);
 
   data.forEach((item) => {
-    const createdAt = new Date(item.createdAt);
+    const createdAt = new Date(item.createdAt ?? item.time);
     const isToday = createdAt.toDateString() === today.toDateString();
     const isYesterday = createdAt.toDateString() === yesterday.toDateString();
     const isLast7Days = createdAt >= sevenDaysAgo;
