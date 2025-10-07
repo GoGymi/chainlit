@@ -24,13 +24,15 @@ interface ThreadListProps {
   error?: string;
   isFetching: boolean;
   isLoadingMore: boolean;
+  filter?: string;
 }
 
 export const ThreadList = ({
   threadHistory,
   error,
   isFetching,
-  isLoadingMore
+  isLoadingMore,
+  filter
 }: ThreadListProps) => {
   const { idToResume } = useChatSession();
   const { clear, setIdToResume } = useChatInteract();
@@ -87,6 +89,20 @@ export const ThreadList = ({
 
   // Delete thread functionality removed
 
+  // Client-side filter of grouped threads
+  const filteredGroups = map(
+    threadHistory.timeGroupedThreads,
+    (items, index) => {
+      if (!filter) return { index, items };
+      const q = filter.toLowerCase();
+      const itemsFiltered = items.filter((t: any) => {
+        const name = (t.name || t.content?.[0]?.text || '').toLowerCase();
+        return name.includes(q);
+      });
+      return { index, items: itemsFiltered };
+    }
+  ).filter((g: any) => g.items.length > 0);
+
   return (
     <List
       sx={{
@@ -95,11 +111,11 @@ export const ThreadList = ({
       }}
       subheader={<li />}
     >
-      {map(threadHistory.timeGroupedThreads, (items, index) => {
+      {filteredGroups.map(({ items, index }: any) => {
         return (
           <li key={`section-${index}`}>
             <ul>
-              <ListSubheader sx={{ px: 0, bgcolor: 'transparent' }}>
+              <ListSubheader sx={{ px: 0, bgcolor: 'background.paper' }}>
                 <Typography
                   sx={{
                     py: 0.5,

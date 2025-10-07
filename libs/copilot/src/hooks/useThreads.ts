@@ -6,22 +6,17 @@ import { ChainlitContext, accessTokenState } from '@chainlit/react-client';
 
 import { groupByDate } from '../utils/group';
 
-const BATCH_SIZE = "20";
+const BATCH_SIZE = '20';
 
-interface UseThreadsProps {
-  search?: string;
-}
-
-export const useThreads = ({ search }: UseThreadsProps) => {
+export const useThreads = () => {
   const apiClient = useContext(ChainlitContext);
   const accessToken = useRecoilValue(accessTokenState);
 
   const query = useInfiniteQuery({
-    queryKey: ['threads', { search }],
+    queryKey: ['threads'],
     queryFn: async ({ pageParam }) => {
       const { pageInfo, data } = await apiClient.listThreads(
-        { first: BATCH_SIZE, cursor: pageParam ?? "0"},
-        { search },
+        { first: BATCH_SIZE, cursor: pageParam ?? '0' },
         accessToken
       );
       return { threads: data, pageInfo };

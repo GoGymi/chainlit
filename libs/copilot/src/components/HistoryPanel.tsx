@@ -29,9 +29,8 @@ export const HistoryPanel = ({ isOpen, onClose }: HistoryPanelProps) => {
     isFetchingNextPage,
     error,
     fetchNextPage,
-    hasNextPage,
-    refetch
-  } = useThreads({ search: searchQuery });
+    hasNextPage
+  } = useThreads();
 
   // Only show if authenticated and data persistence enabled
   const enableHistory = !!accessToken && !!config?.dataPersistence;
@@ -74,7 +73,9 @@ export const HistoryPanel = ({ isOpen, onClose }: HistoryPanelProps) => {
           borderRight: '1px solid',
           borderColor: 'divider',
           bgcolor: 'background.paper',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
+          overflow: 'hidden',
+          overscrollBehavior: 'contain'
         }
       }}
     >
@@ -105,9 +106,9 @@ export const HistoryPanel = ({ isOpen, onClose }: HistoryPanelProps) => {
           <ThreadList
             threadHistory={threadHistory}
             error={error}
-            refetch={refetch}
             isFetching={isLoading}
             isLoadingMore={isFetchingNextPage}
+            filter={searchQuery}
           />
         </Box>
       </Stack>
