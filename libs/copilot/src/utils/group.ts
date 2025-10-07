@@ -1,6 +1,7 @@
 import { IThread } from '@chainlit/react-client';
 
 export const groupByDate = (data: IThread[]) => {
+  console.log('groupByDate', data);
   const groupedData: { [key: string]: IThread[] } = {};
 
   const today = new Date();
