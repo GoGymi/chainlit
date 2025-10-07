@@ -1,7 +1,7 @@
 import capitalize from 'lodash/capitalize';
 import map from 'lodash/map';
 import size from 'lodash/size';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { grey } from 'theme';
 
 import ChatBubbleOutline from '@mui/icons-material/ChatBubbleOutline';
@@ -16,19 +16,15 @@ import Typography from '@mui/material/Typography';
 
 import {
   ThreadHistory,
-  useChatInteract,
   useChatMessages,
   useChatSession
 } from '@chainlit/react-client';
 
 import { Translator } from 'components/i18n';
 
-import { DeleteThreadButton } from './DeleteThreadButton';
-
 interface Props {
   threadHistory?: ThreadHistory;
   error?: string;
-  fetchThreads: () => void;
   isFetching: boolean;
   isLoadingMore: boolean;
 }
@@ -36,14 +32,11 @@ interface Props {
 const ThreadList = ({
   threadHistory,
   error,
-  fetchThreads,
   isFetching,
   isLoadingMore
 }: Props) => {
   const { idToResume } = useChatSession();
-  const { clear } = useChatInteract();
-  const { threadId: currentThreadId } = useChatMessages();
-  const navigate = useNavigate();
+  const { threadId: _currentThreadId } = useChatMessages();
   if (isFetching || (!threadHistory?.timeGroupedThreads && isLoadingMore)) {
     return (
       <>
@@ -86,15 +79,7 @@ const ThreadList = ({
     );
   }
 
-  const handleDeleteThread = (threadId: string) => {
-    if (threadId === idToResume || threadId === currentThreadId) {
-      clear();
-    }
-    if (threadId === threadHistory.currentThreadId) {
-      navigate('/');
-    }
-    fetchThreads();
-  };
+  // Delete thread functionality removed
 
   return (
     <List
@@ -207,12 +192,7 @@ const ThreadList = ({
                           {capitalize(thread.name || 'Unknown')}
                         </Typography>
                       </Stack>
-                      {isSelected ? (
-                        <DeleteThreadButton
-                          threadId={thread.id}
-                          onDelete={() => handleDeleteThread(thread.id)}
-                        />
-                      ) : null}
+                      {/* Delete thread button removed */}
                     </Stack>
                   </Stack>
                 );

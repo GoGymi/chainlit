@@ -19,12 +19,9 @@ import {
   useChatSession
 } from '@chainlit/react-client';
 
-import { DeleteThreadButton } from './DeleteThreadButton';
-
 interface ThreadListProps {
   threadHistory?: ThreadHistory;
   error?: string;
-  refetch: () => void;
   isFetching: boolean;
   isLoadingMore: boolean;
 }
@@ -32,7 +29,6 @@ interface ThreadListProps {
 export const ThreadList = ({
   threadHistory,
   error,
-  refetch,
   isFetching,
   isLoadingMore
 }: ThreadListProps) => {
@@ -89,13 +85,7 @@ export const ThreadList = ({
     setIdToResume(threadId); // Resume selected thread
   };
 
-  const handleDeleteThread = (threadId: string) => {
-    if (threadId === idToResume) {
-      clear();
-      setIdToResume(undefined);
-    }
-    refetch(); // Refresh list
-  };
+  // Delete thread functionality removed
 
   return (
     <List
@@ -190,12 +180,7 @@ export const ThreadList = ({
                         {thread.content[0].text || 'Untitled'}
                       </Typography>
                     </Stack>
-                    {isSelected ? (
-                      <DeleteThreadButton
-                        threadId={thread.id}
-                        onDelete={() => handleDeleteThread(thread.id)}
-                      />
-                    ) : null}
+                    {/* Delete thread button removed */}
                   </Stack>
                 );
               })}
