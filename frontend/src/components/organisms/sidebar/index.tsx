@@ -62,6 +62,7 @@ const SideBar = () => {
             borderRight: 'none',
             px: 2,
             boxSizing: 'border-box',
+            overflow: 'hidden',
             boxShadow: (theme) =>
               theme.palette.mode === 'dark'
                 ? '0px 4px 20px 0px rgba(0, 0, 0, 0.20)'
