@@ -35,7 +35,7 @@ export default function Widget({ config }: Props) {
   const isPopoverOpen = Boolean(anchorEl);
 
   return (
-    <Box sx={{ position: 'fixed', right: '0', top: '0' }}>
+    <Box sx={{ position: 'fixed', right: '0', bottom: '0' }}>
       <PopOver anchorEl={anchorEl} buttonHeight={buttonHeight} />
       <Fab
         disableRipple
@@ -49,9 +49,9 @@ export default function Widget({ config }: Props) {
           ...style
         }}
         onClick={(event: React.MouseEvent<HTMLElement>) => {
-          setAnchorEl(anchorEl ? null : event.currentTarget)
+          setAnchorEl(anchorEl ? null : event.currentTarget);
           if (window.gogymiAnalytics) {
-            window.gogymiAnalytics.recordGymitrainerEvent(anchorEl ? 0 : 1)
+            window.gogymiAnalytics.recordGymitrainerEvent(anchorEl ? 0 : 1);
           }
         }}
       >
