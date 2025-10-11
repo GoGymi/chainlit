@@ -32,7 +32,7 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
         sx={{ width: 14, height: 14, mr: 1, color: 'text.secondary' }}
       />
       <InputBase
-        placeholder="Search conversations..."
+        placeholder="Unterhaltungen suchen..."
         value={value}
         onChange={handleChange}
         sx={{

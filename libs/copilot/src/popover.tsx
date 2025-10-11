@@ -1,6 +1,6 @@
 import Chat from 'chat';
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Stack } from '@mui/material';
 import Fade from '@mui/material/Fade';
@@ -22,6 +22,7 @@ export default function PopOver({ anchorEl, buttonHeight }: Props) {
   const { accessToken } = useAuth();
   const { config } = useConfig();
   const settings = useRecoilValue(copilotSettingsState);
+  const setSettings = useSetRecoilState(copilotSettingsState);
 
   // Calculate popover width based on history panel state
   const enableHistory = !!accessToken && !!config?.dataPersistence;
@@ -36,7 +37,7 @@ export default function PopOver({ anchorEl, buttonHeight }: Props) {
     : `min(${baseWidth}px, 90vw)`; // 400px total
 
   const handlePanelClose = () => {
-    // This is handled by the settings state
+    setSettings((prev) => ({ ...prev, isSidebarOpen: false }));
   };
 
   return (

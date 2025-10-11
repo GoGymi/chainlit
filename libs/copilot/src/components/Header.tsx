@@ -47,7 +47,9 @@ const Header = ({ expanded, setExpanded }: Props): JSX.Element => {
       <Stack direction="row" alignItems="center" spacing={0.5}>
         {enableHistory ? (
           <Tooltip
-            title={settings.isSidebarOpen ? 'Hide history' : 'Show history'}
+            title={
+              settings.isSidebarOpen ? 'Verlauf ausblenden' : 'Verlauf anzeigen'
+            }
             arrow
           >
             <IconButton onClick={toggleSidebar} size="small" sx={{ mr: 0.5 }}>

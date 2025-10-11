@@ -9,11 +9,11 @@ const STORAGE_KEY = 'copilot_sidebar_open';
 const getInitialSidebarState = (): boolean => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored !== null ? stored === 'true' : true; // Default: open
+    return stored !== null ? stored === 'true' : false; // Default: closed
   } catch (error) {
     // Fallback for quota exceeded, private mode, or localStorage disabled
     console.debug('Could not read sidebar state from localStorage:', error);
-    return true;
+    return false;
   }
 };
 
