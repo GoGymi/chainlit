@@ -4,7 +4,9 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-import { Box } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, IconButton } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import {
   ChainlitContext,
@@ -23,7 +25,12 @@ const BATCH_SIZE = 20;
 
 let _scrollTop = 0;
 
-export function ThreadHistory() {
+interface ThreadHistoryProps {
+  onClose?: () => void;
+}
+
+export function ThreadHistory({ onClose }: ThreadHistoryProps) {
+  const isMobile = useMediaQuery('(max-width:66rem)');
   const filters = useRecoilValue(threadsFiltersState);
   const ref = useRef<HTMLDivElement>(null);
   const [prevFilters, setPrevFilters] = useState<IThreadFilters>(filters);
@@ -38,6 +45,13 @@ export function ThreadHistory() {
   const apiClient = useContext(ChainlitContext);
   const { firstInteraction, messages, threadId } = useChatMessages();
   const navigate = useNavigate();
+
+  // Close sidebar on mobile when thread is selected
+  useEffect(() => {
+    if (isMobile && threadId && onClose) {
+      onClose();
+    }
+  }, [threadId, isMobile, onClose]);
 
   useEffect(() => {
     if (ref.current) {
@@ -139,7 +153,22 @@ export function ThreadHistory() {
 
   return (
     <>
-      <Filters />
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          mb: 1,
+          pt: isMobile ? '112px' : 0
+        }}
+      >
+        <Filters />
+        {isMobile && onClose && (
+          <IconButton onClick={onClose} size="small" sx={{ ml: 1 }}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        )}
+      </Box>
       {threadHistory ? (
         <Box
           sx={{ flexGrow: 1, overflow: 'auto' }}

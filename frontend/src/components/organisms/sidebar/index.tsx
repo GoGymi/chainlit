@@ -82,7 +82,7 @@ const SideBar = () => {
           <Logo style={{ maxHeight: '25px' }} />
         </Stack>
         {enableHistory ? (
-          <ThreadHistory />
+          <ThreadHistory onClose={() => setChatHistoryOpen(false)} />
         ) : (
           <Box sx={{ flexGrow: 1, overflow: 'auto' }}>
             <Alert severity="info">Conversations are not persisted.</Alert>

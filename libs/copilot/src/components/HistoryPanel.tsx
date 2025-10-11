@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Box, Drawer, Stack, useMediaQuery } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Box, Drawer, IconButton, Stack, useMediaQuery } from '@mui/material';
 
 import { useAuth, useConfig } from '@chainlit/react-client';
 
@@ -84,10 +85,18 @@ export const HistoryPanel = ({ isOpen, onClose }: HistoryPanelProps) => {
           height: '100%',
           p: 1.5,
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          pt: isMobile ? '112px' : 1.5
         }}
       >
-        <SearchBar onSearch={setSearchQuery} />
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <SearchBar onSearch={setSearchQuery} />
+          {isMobile && (
+            <IconButton onClick={onClose} size="small">
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          )}
+        </Box>
         <Box
           ref={scrollRef}
           onScroll={handleScroll}
