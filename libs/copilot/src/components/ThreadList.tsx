@@ -193,7 +193,9 @@ export const ThreadList = ({
                         }}
                       >
                         {/* {capitalize(thread.name || 'Untitled')} */}
-                        {thread.content[0].text || 'Untitled'}
+                        {thread.content[0] && thread.content[0]?.text
+                          ? thread.content[0]?.text
+                          : 'ohne Titel'}
                       </Typography>
                     </Stack>
                     {/* Delete thread button removed */}
