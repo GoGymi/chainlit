@@ -94,7 +94,8 @@ export class APIBase {
         method,
         headers,
         signal,
-        body
+        body,
+        credentials: 'include'
       });
 
       if (!res.ok) {
@@ -214,6 +215,8 @@ export class ChainlitAPI extends APIBase {
         this.buildEndpoint(`/project/file?session_id=${sessionId}`),
         true
       );
+
+      xhr.withCredentials = true;
 
       if (token) {
         xhr.setRequestHeader('Authorization', this.checkToken(token));

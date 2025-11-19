@@ -10,7 +10,8 @@ import { Translator } from 'components/i18n';
 
 import { ITaskList, Task } from './Task';
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) =>
+  fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 const Header = ({ status }: { status: string }) => {
   const theme = useTheme();

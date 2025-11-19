@@ -102,6 +102,7 @@ const useChatSession = () => {
 
       const socket = io(uri, {
         path,
+        withCredentials: true,
         extraHeaders: {
           Authorization: accessToken || '',
           'X-Chainlit-Client-Type': client.type,
